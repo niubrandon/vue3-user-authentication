@@ -5,7 +5,7 @@
 ### https://www.vuemastery.com/courses/token-based-authentication
 
 ## Features
-- Using JWT token for user authentication. A simple backend server was provided for the user auth endpoints in express.js and sytles were provided as well
+- Using JWT token for user authentication. A simple backend server was provided for the user auth endpoints in express.js and styles were provided as well
 - Using VUEX for states management with design pattern using states, mutations, actions, getters
 - Using vee-validate package in addition to YUP(pre-built validation library) for forms/fileds validation
 - Using Vue Router for frontend pages routing
