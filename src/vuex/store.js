@@ -25,6 +25,22 @@ export default new Vuex.Store({
           //design pattern to commit after successful action
           commit('SET_USER_DATA', data)
         })
+    },
+    login ({ commit }, credentials) {
+      return axios
+        .post('//localhost:3000/login', credentials)
+        .then(({ data }) => {
+          console.log('user data is:', data)
+          //design pattern to commit after successful action
+          commit('SET_USER_DATA', data)
+        })
+    }
+  },
+  // getters with helper function to check if user logged in?
+  getters: {
+    loggedIn (state) {
+      //double !!return truthy or falsy value
+      return !!state.user
     }
   }
 })

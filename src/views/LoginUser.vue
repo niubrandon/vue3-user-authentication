@@ -1,11 +1,7 @@
 <template>
-<div>
-  <form @submit.prevent="register">
-    <label for="name">
-      Name:
-    </label>
-    <input v-model="name" type="text" name="name" value>
-
+  <div>
+  <form @submit.prevent="login">
+   
     <label for="email">
       Email:
     </label>
@@ -17,10 +13,10 @@
     <input v-model="password" type="password" name="password" value>
 
     <button type="submit" name="button">
-      Register
+      Login    
     </button>
-    <router-link to="/login">
-      Already have an account? Login.
+    <router-link to="/register">
+      Don't have an account? Register.
     </router-link>
   </form>
 </div> 
@@ -30,22 +26,18 @@
 export default {
   data() {
     return {
-      name: '',
       email: '',
       password: ''
     }
   },
   methods: {
-    register() {
-      this.$store.dispatch('register', {
-        name: this.name,
+    login () {
+      this.$store.dispatch('login', {
         email: this.email,
         password: this.password
       })
       .then(() => {
-        // redirect to dashboard
         this.$router.push({ name: 'dashboard' })
-
       })
     }
   }
