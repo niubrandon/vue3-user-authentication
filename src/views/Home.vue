@@ -12,11 +12,10 @@
       </router-link>
     </div>
   </div>
-
 </template>
 
 <script>
-import { authComputed } from "../vuex/helpers"
+import { authComputed } from '../vuex/helpers'
 export default {
   computed: {
     ...authComputed

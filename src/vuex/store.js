@@ -12,8 +12,18 @@ export default new Vuex.Store({
     SET_USER_DATA (state, userData) {
       state.user = userData
       localStorage.setItem('user', JSON.stringify(userData))
-      //persist the authorization header for axios request
+      // persist the authorization header for axios request
       axios.defaults.headers.common['Authorization'] = `Bearer ${ userData.token }`
+    },
+    /* CLEAR_USER_DATA (state) {
+      state.user = null
+      localStorage.removeItem('user')
+      axios.defaults.headers.common['Authorization'] = null
+    } */
+    // hard refresh on page logout user - scalable solution
+    CLEAR_USER_DATA () {
+      localStorage.removeItem('user')
+      location.reload()
     }
   },
   actions: {
@@ -22,7 +32,7 @@ export default new Vuex.Store({
         .post('//localhost:3000/register', credentials)
         .then(({ data }) => {
           console.log('user data is:', data)
-          //design pattern to commit after successful action
+          // design pattern to commit after successful action
           commit('SET_USER_DATA', data)
         })
     },
@@ -31,15 +41,18 @@ export default new Vuex.Store({
         .post('//localhost:3000/login', credentials)
         .then(({ data }) => {
           console.log('user data is:', data)
-          //design pattern to commit after successful action
+          // design pattern to commit after successful action
           commit('SET_USER_DATA', data)
         })
+    },
+    logout ({ commit }) {
+      commit('CLEAR_USER_DATA')
     }
   },
   // getters with helper function to check if user logged in?
   getters: {
     loggedIn (state) {
-      //double !!return truthy or falsy value
+      // double !!return truthy or falsy value
       return !!state.user
     }
   }

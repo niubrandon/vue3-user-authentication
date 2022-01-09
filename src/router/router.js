@@ -19,7 +19,9 @@ const router = new Router({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: Dashboard
+      component: Dashboard,
+      // router guard to control private access through meta prop
+      meta: { requiresAuth: true }
     },
     {
       path: '/register',
@@ -34,4 +36,28 @@ const router = new Router({
   ]
 })
 
+// router guard: pre-check before direct to new pages if user is loggedin
+router.beforeEach((to, from, next) => {
+  const loggedIn = localStorage.getItem('user')
+
+  if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
+    next('/')
+  }
+
+  next()
+})
+
+/* router.beforeEach((to, from, next) => {
+  const loggedIn = localStorage.getItem('user')
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!loggedIn) {
+      next('/')
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+ */
 export default router
