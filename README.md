@@ -1,4 +1,9 @@
-# authentication_course
+# vue3-user-authentication
+## This project is based on a tutorial project from Vue Mastery - Intermidate level course: Token-Based Authentication. However, many additional features have been added such as ....
+
+### Here is the link of this awesome course:
+### https://www.vuemastery.com/courses/token-based-authentication
+
 
 ## Project setup
 
